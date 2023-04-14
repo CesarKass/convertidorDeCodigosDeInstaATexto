@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textos a Codigos o inversa</title>
+</head>
+
+<body>
+    <h2 id="textQ">ingresa codigo de insta</h2>
+    <input type="text" name="t" id="t" onkeyup="get(this);">
+    <input type="checkbox" id="che" onclick="reset();"> Inversa
+    <div id="text"></div>
+
+    <script>
+        const listado = [
+            {
+                "id": "o22",
+                "letra": "A"
+            },
+            {
+                "id": "o76",
+                "letra": "B"
+            },
+            {
+                "id": "o99",
+                "letra": "C"
+            },
+            {
+                "id": "o12",
+                "letra": "D"
+            },
+            {
+                "id": "o43",
+                "letra": "E"
+            },
+            {
+                "id": "o98",
+                "letra": "F"
+            },
+            {
+                "id": "o24",
+                "letra": "G"
+            },
+            {
+                "id": "o34",
+                "letra": "H"
+            },
+            {
+                "id": "o66",
+                "letra": "I"
+            },
+            {
+                "id": "o45",
+                "letra": "J"
+            },
+            {
+                "id": "o54",
+                "letra": "K"
+            },
+            {
+                "id": "o84",
+                "letra": "L"
+            },
+            {
+                "id": "o33",
+                "letra": "M"
+            },
+            {
+                "id": "o12",
+                "letra": "N"
+            },
+            {
+                "id": "o89",
+                "letra": "O"
+            },
+            {
+                "id": "o29",
+                "letra": "P"
+            },
+            {
+                "id": "o38",
+                "letra": "Q"
+            },
+            {
+                "id": "o56",
+                "letra": "R"
+            },
+            {
+                "id": "o23",
+                "letra": "S"
+            },
+            {
+                "id": "o65",
+                "letra": "T"
+            },
+            {
+                "id": "o41",
+                "letra": "U"
+            },
+            {
+                "id": "o74",
+                "letra": "V"
+            },
+            {
+                "id": "o77",
+                "letra": "W"
+            },
+            {
+                "id": "o39",
+                "letra": "X"
+            },
+            {
+                "id": "o26",
+                "letra": "Y"
+            },
+            {
+                "id": "o10",
+                "letra": "Z"
+            },
+        ];
+
+        function reset() { 
+            document.getElementById('t').value = '';
+            document.getElementById('text').innerHTML = '';
+            var check = document.getElementById('che'); 
+            if (check.checked) {
+                document.getElementById('textQ').innerHTML = 'ingresa un texto cualquiera';
+            }else{
+                document.getElementById('textQ').innerHTML = 'ingresa codigos de insta';
+            }
+        }
+        
+        function codigoAtexto(cadenaADividir, separador) {
+            var textt = ``;
+            cadenaADividir = cadenaADividir.replaceAll(',', ''); 
+            var arrayDeCadenas = cadenaADividir.split(separador); 
+            for (var i = 0; i < arrayDeCadenas.length; i++) {  
+                let tex = listado.find(y => y.id == 'o'+arrayDeCadenas[i]);  
+                if (!tex == '') { 
+                    // console.log(tex.letra); 
+                    textt += `${tex.letra}`;
+                }
+            }
+            document.getElementById('text').innerHTML = textt;
+        } 
+
+        function textoAcodigo(cadenaADividir, separador) {
+            var textt = ``;
+            cadenaADividir = cadenaADividir.toUpperCase();
+            console.log(cadenaADividir);
+            const myArray = cadenaADividir.split(""); 
+
+            for (var i = 0; i < cadenaADividir.length; i++) {  
+                    let tex = listado.find(y => y.letra == myArray[i]); 
+                    if (!tex == '') { 
+                        // console.log(tex.letra); 
+                        textt += `${tex.id},`;
+                    }
+            }
+
+            document.getElementById('text').innerHTML = textt;
+        } 
+
+        var cadena = "o65,o43,o33,o22,o33,o22,o23"; 
+        function get(t) {
+            var check = document.getElementById('che'); 
+            if (check.checked) {
+                textoAcodigo(t.value, "o");
+            }else{
+                // console.log(t.value);
+                if (!t.value == '') {
+                    codigoAtexto(t.value, "o");
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>
